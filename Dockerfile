@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/php
-ARG PHP_VERSION=latest
+ARG PHP_VERSION=7.1
 FROM php:${PHP_VERSION}-cli-alpine as php
 COPY phpenv.php /
 
@@ -14,7 +14,7 @@ RUN set -x \
  && cp -a /var/www var/www
 
 # create actual image
-FROM roeldev/base-alpine
+FROM roeldev/base-alpine:latest
 
 # make sure www-data user and group exist
 RUN set -x \
