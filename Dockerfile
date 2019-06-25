@@ -1,5 +1,6 @@
 # https://hub.docker.com/_/php
-FROM php:7.1-cli-alpine as php
+ARG PHP_VERSION=latest
+FROM php:${PHP_VERSION}-cli-alpine as php
 COPY phpenv.php /
 
 # prepare files to copy to main image
@@ -12,7 +13,7 @@ RUN set -x \
  && cp -a /usr/src usr/src \
  && cp -a /var/www var/www
 
-# runtime stage
+# create actual image
 FROM roeldev/base-alpine
 
 # make sure www-data user and group exist
@@ -22,6 +23,7 @@ RUN set -x \
 
 # take php related files etc.
 COPY --from=php /root-out /
+ENV PHP_INI_DIR="/usr/local/etc/php"
 
 # install dependencies
 RUN apk add --no-cache \
@@ -31,7 +33,8 @@ RUN apk add --no-cache \
         curl \
         tar \
         xz \
-        openssl
+        openssl \
+ && pecl update-channels \
+ && rm -rf /tmp/* ~/.pearrc
 
 COPY systemfiles/ /
-ENV PHP_INI_DIR="/usr/local/etc/php"
