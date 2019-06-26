@@ -15,6 +15,7 @@ RUN set -x \
  && apk add \
     --no-cache \
         ca-certificates \
+        curl \
         openssl \
         libedit \
         libxml2 \
