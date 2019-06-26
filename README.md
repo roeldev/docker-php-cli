@@ -1,5 +1,5 @@
 docker-php-cli
-==================
+==============
 
 [![Latest release][latest-release-img]][latest-release-url]
 [![Build status][build-status-img]][build-status-url]
@@ -16,8 +16,34 @@ docker-php-cli
 [image-size-url]: https://hub.docker.com/r/roeldev/php-cli/tags
 
 
-A custom image based on the official Docker PHP image
+A custom image with PHP 7.1, based on Alpine Linux with S6 overlay.
 
+## Installed modules
+```
+[PHP Modules]
+Core
+ctype
+curl
+date
+filter
+hash
+json
+libxml
+mbstring
+openssl
+pcre
+Phar
+phpdbg_webhelper
+readline
+Reflection
+SPL
+standard
+tokenizer
+xml
+zlib
+
+[Zend Modules]
+```
 
 ## Links
 - Github: https://github.com/roeldev/docker-php-cli
