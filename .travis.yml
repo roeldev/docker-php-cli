@@ -1,5 +1,5 @@
 sudo: required
-
+language: minimal
 services:
   - docker
 
@@ -14,7 +14,7 @@ env:
     - PHP_VERSION=7.3
 
 script:
-  - ./.travis/build.sh $PHP_VERSION
+  - ./.build/build.sh $PHP_VERSION
 
 before_deploy:
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
