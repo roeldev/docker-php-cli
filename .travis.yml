@@ -20,4 +20,4 @@ before_deploy:
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
 
 deploy:
-  - docker push $DOCKER_REPO
+  script: docker push $DOCKER_REPO
