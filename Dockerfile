@@ -1,7 +1,8 @@
 FROM roeldev/base-alpine:latest
 
-ARG PHP_VERSION=7.1
-ENV PHP_VERSION=${PHP_VERSION}
+ARG PHP_VERSION="7.1"
+ARG PHP_EXTENSIONS=""
+ENV PHP_VERSION="${PHP_VERSION}"
 ENV PHP_INI_DIR="/usr/local/etc/php"
 
 ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.pub

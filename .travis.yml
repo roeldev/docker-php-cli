@@ -1,0 +1,23 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - MAINTAINER=roeldev
+    - GITHUB_REPO=roeldev/docker-php-cli
+    - DOCKER_REPO=roeldev/php-cli
+  matrix:
+    - PHP_VERSION=7.1
+    - PHP_VERSION=7.2
+    - PHP_VERSION=7.3
+
+script:
+  - ./.travis/build.sh $PHP_VERSION
+
+before_deploy:
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+
+deploy:
+  - docker push $DOCKER_REPO
