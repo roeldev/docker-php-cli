@@ -14,8 +14,8 @@ env:
     - PHP_VERSION=7.3
 
 script:
-  - chmod ugo+x .build/build.sh
-  - .build/build.sh $PHP_VERSION
+  - chmod ugo+x build/build.sh
+  - build/build.sh $PHP_VERSION
 
 before_deploy:
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
