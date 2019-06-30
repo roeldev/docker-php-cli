@@ -76,4 +76,5 @@ if ${LATEST}
 then
     echo Use image as latest
     docker tag ${DOCKER_REPO}:${IMAGE_VERSION} ${DOCKER_REPO}:${PHP_VERSION}-latest
+    docker tag ${DOCKER_REPO}:${IMAGE_VERSION} ${DOCKER_REPO}:${PHP_VERSION}
 fi
