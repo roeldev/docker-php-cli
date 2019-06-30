@@ -1,4 +1,4 @@
-FROM roeldev/base-alpine:latest
+FROM roeldev/base-alpine:3.9-latest
 
 ARG PHP_VERSION="7.1"
 ARG PHP_EXTENSIONS=""
