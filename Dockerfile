@@ -39,4 +39,4 @@ RUN set -x \
  && pecl update-channels \
  && rm -rf /tmp/* ~/.pearrc
 
-COPY systemfiles/ /
+COPY rootfs/ /
