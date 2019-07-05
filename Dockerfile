@@ -1,9 +1,5 @@
 FROM roeldev/base-alpine:3.9-latest
-
 ARG PHP_VERSION="7.1"
-ARG PHP_EXTENSIONS=""
-ENV PHP_VERSION="${PHP_VERSION}"
-ENV PHP_INI_DIR="/usr/local/etc/php"
 
 ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.pub
 
@@ -13,6 +9,7 @@ RUN set -x \
  && addgroup -g 82 -S www-data \
  && adduser -u 82 -D -S -G www-data www-data \
  # install dependencies
+ && apk update \
  && apk add \
     --no-cache \
         ca-certificates \
@@ -30,9 +27,10 @@ RUN set -x \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
         php${PHP_VERSION}-tokenizer \
-        ${PHP_EXTENSIONS} \
  # create directories
- && mkdir -p "${PHP_INI_DIR}/conf.d" /var/www/html \
+ && mkdir -p \
+    "/usr/local/etc/php/conf.d" \
+    "/var/www/html" \
  && chown www-data:www-data /var/www/html \
  && chmod 777 /var/www/html \
  # update pecl channel definitions
