@@ -61,3 +61,7 @@ zlib
 - Github: https://github.com/roeldev/docker-php-cli
 - Docker hub: https://hub.docker.com/r/roeldev/php-cli
 - PHP.earth packages: https://repos.php.earth/alpine/v3.9/x86_64/
+
+
+## License
+[GPL-3.0+](LICENSE) © 2019 [Roel Schut](https://roelschut.nl)
