@@ -27,14 +27,17 @@ RUN set -x \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
         php${PHP_VERSION}-tokenizer \
- # create directories
- && mkdir -p \
-    "/usr/local/etc/php/conf.d" \
-    "/var/www/html" \
- && chown www-data:www-data /var/www/html \
- && chmod 777 /var/www/html \
- # update pecl channel definitions
+  # update pecl channel definitions
  && pecl update-channels \
  && rm -rf /tmp/* ~/.pearrc
 
 COPY rootfs/ /
+
+RUN set -x \
+ # create directories
+ && mkdir -p \
+    /usr/local/etc/php/conf.d \
+    /var/www/html \
+ && chown www-data:www-data /var/www/html \
+ && chmod 777 /var/www/html \
+ && chmod +x /usr/local/bin/*.sh
