@@ -68,8 +68,10 @@ zlib
 ## Install scripts
 The installer scripts within this container are meant as a starting point for usage in local development images or with Docker multi builds. Usage within production images is not recommended.
 
-### Install composer
-Make sure the required dependencies for composer (git, unzip) are installed, then run `/etc/container/install_composer.sh`.
+### Install Composer
+Make sure the required dependencies for Composer (git, unzip) are installed, then run `/usr/local/bin/install_composer
+.sh`. Composer's install script and signature are downloaded from the Composer website and stored in 
+`/etc/composer/`. The Composer executable is moved to `/usr/local/bin/` and ready to be used.
 
 
 ## Links
