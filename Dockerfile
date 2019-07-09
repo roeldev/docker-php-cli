@@ -1,4 +1,4 @@
-FROM roeldev/base-alpine:3.9-latest
+FROM roeldev/base-alpine:3.9-v1
 ARG PHP_VERSION="7.1"
 
 ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.pub
@@ -38,6 +38,4 @@ RUN set -x \
  && mkdir -p \
     /usr/local/etc/php/conf.d \
     /var/www/html \
- && chown www-data:www-data /var/www/html \
- && chmod 777 /var/www/html \
- && chmod +x /usr/local/bin/*.sh
+ && chown www-data:www-data /var/www/html
