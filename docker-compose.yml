@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  travis:
+    image: roeldev/php-cli:${PHP_VERSION}-${IMAGE_TAG}
+    build:
+      context: .
+      args:
+        PHP_VERSION: "${PHP_VERSION}"
+
+  local:
+    image: roeldev/php-cli:local
+    container_name: php-cli
+    build: .
