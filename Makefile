@@ -1,7 +1,7 @@
 CONTAINER=php-cli
 
 .PHONY it:
-it: build start
+it: build tag start
 
 .PHONY build:
 build:
@@ -18,6 +18,10 @@ stop:
 
 .PHONY restart:
 restart: stop start
+
+.PHONY tag:
+tag:
+	docker tag roeldev/php-cli:local roeldev/php-cli:7.1-v1
 
 .PHONY login:
 login:
