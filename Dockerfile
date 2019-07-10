@@ -6,8 +6,15 @@ ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.p
 RUN set -x \
  && echo "https://repos.php.earth/alpine/v3.9" >> /etc/apk/repositories \
  # ensure www-data user and group exists, 82 is the standard uid/gid in Alpine
- && addgroup -g 82 -S www-data \
- && adduser -u 82 -D -S -G www-data www-data \
+ && addgroup \
+    -S \
+    -g 82 \
+    www-data \
+ && adduser \
+    -D -S \
+    -u 82 \
+    -G www-data \
+    www-data \
  # install dependencies
  && apk update \
  && apk add \
@@ -29,7 +36,9 @@ RUN set -x \
         php${PHP_VERSION}-tokenizer \
   # update pecl channel definitions
  && pecl update-channels \
- && rm -rf /tmp/* ~/.pearrc
+ && rm -rf \
+    /tmp/* \
+    ~/.pearrc
 
 COPY rootfs/ /
 
@@ -37,5 +46,4 @@ RUN set -x \
  # create directories
  && mkdir -p \
     /usr/local/etc/php/conf.d \
-    /var/www/html \
- && chown www-data:www-data /var/www/html
+    /var/www/html

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 mkdir -p /etc/composer
 
@@ -29,3 +30,5 @@ php /etc/composer/composer-installer.php \
     --quiet \
     --install-dir=/usr/local/bin \
     --filename=composer
+
+composer --version --no-ansi
