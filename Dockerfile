@@ -34,8 +34,9 @@ RUN set -x \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
         php${PHP_VERSION}-tokenizer \
-  # update pecl channel definitions
+ # update pecl channel definitions
  && pecl update-channels \
+ # cleanup
  && rm -rf \
     /tmp/* \
     ~/.pearrc
@@ -44,6 +45,9 @@ COPY rootfs/ /
 
 RUN set -x \
  # create directories
- && mkdir -p \
-    /usr/local/etc/php/conf.d \
-    /var/www/html
+ && mkdir -p /var/www/html \
+ # make install scripts executable so they can be used within other
+ # Dockerfiles. this prevents "Permission denied" errors
+ && chmod +x \
+    /usr/local/bin/install_composer.sh \
+    /usr/local/bin/install_xdebug.sh
