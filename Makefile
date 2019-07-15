@@ -6,6 +6,10 @@ CONTAINER_NAME=php-cli
 .PHONY it:
 it: build tag start
 
+.PHONY renew:
+renew:
+	docker pull roeldev/base-alpine:3.9-v1
+
 .PHONY build:
 build:
 	docker-compose build local
