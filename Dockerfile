@@ -1,20 +1,6 @@
 FROM roeldev/base-alpine:3.9-v1
-ARG PHP_VERSION="7.1"
-
-ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.pub
 
 RUN set -x \
- && echo "https://repos.php.earth/alpine/v3.9" >> /etc/apk/repositories \
- # ensure www-data user and group exists, 82 is the standard uid/gid in Alpine
- && addgroup \
-    -S \
-    -g 82 \
-    www-data \
- && adduser \
-    -D -S \
-    -u 82 \
-    -G www-data \
-    www-data \
  # install dependencies
  && apk update \
  && apk add \
@@ -23,7 +9,22 @@ RUN set -x \
         curl \
         openssl \
         libedit \
-        libxml2 \
+        libxml2
+
+ADD https://repos.php.earth/alpine/phpearth.rsa.pub /etc/apk/keys/phpearth.rsa.pub
+RUN set -x \
+ # verify repository key
+ && EXPECTED_KEY="708c3ad1f676e97cc09b465458734e415c646c092867f509663a89a120474dcee2a242703e6a135d6a9687e9fb3c226756a537630af861505b5096c53b7f91e3 *stdin" \
+ && ACTUAL_KEY=$( openssl rsa -pubin -in /etc/apk/keys/phpearth.rsa.pub -text -noout | openssl sha512 -r ) \
+ && if [ "${ACTUAL_KEY}" = "${EXPECTED_KEY}" ]; then echo "key verification succeeded!"; \
+    else echo "key verification failed!"; exit 1; fi \
+ # add repository
+ && echo "https://repos.php.earth/alpine/v$( alpine_version )" >> /etc/apk/repositories
+
+ARG PHP_VERSION="7.1"
+RUN set -ex \
+ && apk add \
+    --no-cache \
         php${PHP_VERSION} \
         php${PHP_VERSION}-common \
         php${PHP_VERSION}-ctype \
@@ -44,8 +45,6 @@ RUN set -x \
 COPY rootfs/ /
 
 RUN set -x \
- # create directories
- && mkdir -p /var/www/html \
  # make install scripts executable so they can be used within other
  # Dockerfiles. this prevents "Permission denied" errors
  && chmod +x \
