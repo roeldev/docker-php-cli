@@ -21,8 +21,9 @@ RUN set -x \
  # add repository
  && echo "https://repos.php.earth/alpine/v$( alpine_version )" >> /etc/apk/repositories
 
+ENV PHP_INI_SCAN_DIR=":/app/config/php/"
 ARG PHP_VERSION="7.1"
-RUN set -ex \
+RUN set -x \
  && apk add \
     --no-cache \
         php${PHP_VERSION} \

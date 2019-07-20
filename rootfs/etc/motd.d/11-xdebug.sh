@@ -1,7 +1,8 @@
 #!/bin/sh
 
-XDEBUG_VERSION=$( php -r "echo phpversion('xdebug');" )
-if [ ! -z "${XDEBUG_VERSION}" ]
+xdebugVersion=$( php -r "echo phpversion('xdebug');" )
+
+if [ ! -z "${xdebugVersion}" ]
 then
-    echo "Xdebug version: ${XDEBUG_VERSION}"
+    echo "Xdebug version: ${xdebugVersion}"
 fi
