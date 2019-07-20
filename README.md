@@ -76,7 +76,7 @@ Make sure the required dependencies for Composer (git, unzip) are installed, the
 `/etc/composer/`. The Composer executable is moved to `/usr/local/bin/` and ready to be used.
 
 ### Install Xdebug
-Compile and install xdebug by running `/usr/local/bin/install_xdebug.sh`.
+Compile and install xdebug by running `/usr/local/bin/install_xdebug.sh`. Change any of the default settings in `/app/config/php/xdebug.ini` to your needs.
 
 
 ## Links
