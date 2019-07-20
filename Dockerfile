@@ -1,4 +1,4 @@
-FROM roeldev/base-alpine:3.9-v1
+FROM roeldev/base-alpine:3.9-v1.1
 
 RUN set -x \
  # install dependencies
