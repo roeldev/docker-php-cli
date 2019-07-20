@@ -2,10 +2,11 @@
 set -e
 
 phpVersion=$( php -r "echo phpversion();" | cut -d'.' -f 1-2 )
+xdebugVersion="2.7.2"
 
 curl -fLs \
     -o /tmp/xdebug.tgz \
-    https://xdebug.org/files/xdebug-2.7.2.tgz
+    https://xdebug.org/files/xdebug-${xdebugVersion}.tgz
 
 apk add \
     --no-cache \
@@ -13,7 +14,7 @@ apk add \
     php7.1-dev
 
 tar -xzf /tmp/xdebug.tgz -C /tmp/
-cd /tmp/xdebug-2.7.2
+cd /tmp/xdebug-${xdebugVersion}
 
 phpize && ./configure && make
 

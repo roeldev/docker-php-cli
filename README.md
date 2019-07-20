@@ -75,6 +75,9 @@ Make sure the required dependencies for Composer (git, unzip) are installed, the
 .sh`. Composer's install script and signature are downloaded from the Composer website and stored in 
 `/etc/composer/`. The Composer executable is moved to `/usr/local/bin/` and ready to be used.
 
+### Install Xdebug
+Compile and install xdebug by running `/usr/local/bin/install_xdebug.sh`.
+
 
 ## Links
 - GitHub: https://github.com/roeldev/docker-php-cli
