@@ -2,13 +2,11 @@
 IMAGE_NAME=roeldev/php-cli
 # local.container_name
 CONTAINER_NAME=php-cli
+# local.build.args.PHP_VERSION
+DEFAULT_PHP_VERSION=7.1
 
 .PHONY it:
 it: build tag start
-
-.PHONY renew:
-renew:
-	docker pull roeldev/base-alpine:3.9-v1
 
 .PHONY build:
 build:
@@ -35,8 +33,12 @@ inspect:
 
 .PHONY tag:
 tag:
-	docker tag ${IMAGE_NAME}:local ${IMAGE_NAME}:7.1-v1
+	docker tag ${IMAGE_NAME}:local ${IMAGE_NAME}:${DEFAULT_PHP_VERSION}-v1
 
 .PHONY login:
 login:
 	docker exec -it ${CONTAINER_NAME} bash
+
+.PHONY renew:
+renew:
+	docker pull roeldev/base-alpine:3.9-v1
