@@ -41,4 +41,4 @@ login:
 
 .PHONY renew:
 renew:
-	docker pull roeldev/base-alpine:3.9-v1
+	docker pull roeldev/base-alpine:3.9-v1.1
