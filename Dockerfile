@@ -21,7 +21,6 @@ RUN set -x \
  # add repository
  && echo "https://repos.php.earth/alpine/v$( alpine_version )" >> /etc/apk/repositories
 
-ENV PHP_INI_SCAN_DIR=":/app/config/php/"
 ARG PHP_VERSION="7.1"
 RUN set -x \
  && apk add \
@@ -36,6 +35,9 @@ RUN set -x \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
         php${PHP_VERSION}-tokenizer \
+ # update default php settings
+ && sed -i -E 's/;?expose_php = .+/expose_php = off/g' /etc/php/${PHP_VERSION}/php.ini \
+ && sed -i -E 's/;?date.timezone =.?/date.timezone = UTC/g' /etc/php/${PHP_VERSION}/php.ini \
  # update pecl channel definitions
  && pecl update-channels \
  # cleanup
@@ -46,6 +48,13 @@ RUN set -x \
 COPY rootfs/ /
 
 RUN set -x \
+ # move all php config files to /etc/php.d and create a symlink to the original
+ # php/conf.d folder. this way we have a config folder without the php version
+ # in it's path
+ && mv /etc/php/${PHP_VERSION}/conf.d/* /etc/php.d/ \
+ && rm -rf /etc/php/${PHP_VERSION}/conf.d \
+ && ln -s /etc/php.d /etc/php/${PHP_VERSION}/conf.d \
+ && chmod -R 0644 /etc/php.d \
  # make install scripts executable so they can be used within other
  # Dockerfiles. this prevents "Permission denied" errors
  && chmod +x \
