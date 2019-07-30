@@ -1,0 +1,2 @@
+/etc/php.d              true    root:root   0644 0644
+/usr/lib/php/modules    true    root:root   0755 0755

@@ -1,32 +1,34 @@
 #!/bin/sh
 set -e
 
+installerFile=/etc/composer/composer-installer.php
+signatureFile=/etc/composer/composer-signature.sig
+
 mkdir -p /etc/composer
 
 # download composer installer + signature
 curl -fLs \
     --retry 3 \
-    --output /etc/composer/composer-installer.php \
+    --output ${installerFile} \
     --url https://getcomposer.org/installer
 
 curl -fLs \
     --retry 3 \
-    --output /etc/composer/composer-signature.sig \
+    --output ${signatureFile} \
     --url https://composer.github.io/installer.sig
 
-EXPECTED_SIGNATURE="$( cat /etc/composer/composer-signature.sig )"
-ACTUAL_SIGNATURE="$( php -r "echo hash_file('sha384', '/etc/composer/composer-installer.php');" )"
-
 # verify installer signature
-if [ "${EXPECTED_SIGNATURE}" != "${ACTUAL_SIGNATURE}" ]
+expectedSignature="$( cat ${signatureFile} )"
+actualSignature="$( php -r "echo hash_file('sha384', '${installerFile}');" )"
+
+if [ "${expectedSignature}" != "${actualSignature}" ]
 then
     >&2 echo 'ERROR: Invalid composer installer signature'
-    rm /etc/composer/composer-installer
     exit 1
 fi
 
-# install composer to /usr/local/bin
-php /etc/composer/composer-installer.php \
+# run composer installer and install to /usr/local/bin
+php ${installerFile} \
     --quiet \
     --install-dir=/usr/local/bin \
     --filename=composer

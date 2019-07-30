@@ -21,7 +21,6 @@ RUN set -x \
  # add repository
  && echo "https://repos.php.earth/alpine/v$( alpine_version )" >> /etc/apk/repositories
 
-ENV PHP_INI_SCAN_DIR=":/app/config/php/"
 ARG PHP_VERSION="7.1"
 RUN set -x \
  && apk add \
@@ -35,13 +34,27 @@ RUN set -x \
         php${PHP_VERSION}-openssl \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
-        php${PHP_VERSION}-tokenizer \
- # update pecl channel definitions
- && pecl update-channels \
- # cleanup
- && rm -rf \
-    /tmp/* \
-    ~/.pearrc
+        php${PHP_VERSION}-tokenizer
+
+RUN set -x \
+ # update default php settings
+ && sed -i -E 's/;?expose_php = .+/expose_php = off/g' /etc/php/${PHP_VERSION}/php.ini \
+ && sed -i -E 's/;?date.timezone =.?/date.timezone = UTC/g' /etc/php/${PHP_VERSION}/php.ini \
+ # create folders for php configs/modules without php version in it's path. this
+ # allows us to ignore the used php version and add files using COPY rootfs/ /
+ && mkdir -p \
+    /etc/php.d/ \
+    /usr/lib/php/modules/ \
+ # move all php configs + add symlink to old location
+ && mv /etc/php/${PHP_VERSION}/conf.d/* /etc/php.d/ \
+ && rm -rf /etc/php/${PHP_VERSION}/conf.d \
+ && ln -s /etc/php.d /etc/php/${PHP_VERSION}/conf.d \
+ && chmod -R 0644 /etc/php.d \
+ # move all modules + add symlink to old location
+ && mv /usr/lib/php/${PHP_VERSION}/modules/* /usr/lib/php/modules/ \
+ && rm -rf /usr/lib/php/${PHP_VERSION}/modules \
+ && ln -s /usr/lib/php/modules /usr/lib/php/${PHP_VERSION}/modules \
+ && chmod -R 0755 /usr/lib/php/modules
 
 COPY rootfs/ /
 
@@ -50,4 +63,10 @@ RUN set -x \
  # Dockerfiles. this prevents "Permission denied" errors
  && chmod +x \
     /usr/local/bin/install_composer.sh \
-    /usr/local/bin/install_xdebug.sh
+    /usr/local/bin/install_xdebug.sh \
+ # update pecl channel definitions
+ && pecl update-channels \
+ # cleanup
+ && rm -rf \
+    /tmp/* \
+    ~/.pearrc
