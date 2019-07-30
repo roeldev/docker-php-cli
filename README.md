@@ -40,6 +40,15 @@ A custom image with PHP, based on Alpine Linux with S6 overlay.
 [mb-74-url]: https://microbadger.com/images/roeldev/php-cli:7.4-rc-latest
 
 
+## PHP configuration
+The following php.ini directives are changed from their default values:
+
+| Name | Value |
+|------|-------|
+| expose_php | off
+| date.timezone | UTC
+
+
 ## Installed modules
 ```
 [PHP Modules]
@@ -76,7 +85,7 @@ Make sure the required dependencies for Composer (git, unzip) are installed, the
 `/etc/composer/`. The Composer executable is moved to `/usr/local/bin/` and ready to be used.
 
 ### Install Xdebug
-Compile and install xdebug by running `/usr/local/bin/install_xdebug.sh`. Change any of the default settings in `/app/config/php/xdebug.ini` to your needs.
+Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will also copy a default xdebug.ini config file to `/app/config/php/xdebug.ini` where you can change the settings to your needs.
 
 
 ## Links
