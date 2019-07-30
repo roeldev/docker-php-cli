@@ -1,4 +1,4 @@
-zend_extension=/usr/lib/php/7.1/modules/xdebug.so
+zend_extension=xdebug.so
 
 [xdebug]
 xdebug.default_enable = 1

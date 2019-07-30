@@ -23,7 +23,7 @@ fi
 apk add \
     --no-cache \
     --virtual .phpize-dependencies \
-    php7.1-dev
+    php${phpVersion}-dev
 
 tar -xzf ${tmpFile} -C /tmp/
 cd /tmp/xdebug-${xdebugVersion}
@@ -32,7 +32,7 @@ cd /tmp/xdebug-${xdebugVersion}
 phpize && ./configure && make
 
 # copy compile module
-cp modules/xdebug.so /usr/lib/php/7.1/modules
+cp modules/xdebug.so /usr/lib/php/modules
 
 # make sure the default config is copied to the /app/config/php folder
 # so the user can override the default xdebug settings
