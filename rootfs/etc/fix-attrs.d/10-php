@@ -1,2 +1,2 @@
-/etc/php.d              true    root:root   0755 0755
-/usr/lib/php/modules    true    root:root   0755 0755
+/etc/php.d/             true    root:root   0755 0755
+/usr/lib/php/modules/   true    root:root   0755 0755
