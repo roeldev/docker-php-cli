@@ -21,7 +21,7 @@ RUN set -x \
  # add repository
  && echo "https://repos.php.earth/alpine/v$( alpine_version )" >> /etc/apk/repositories
 
-ARG PHP_VERSION="7.1"
+ARG PHP_VERSION="7.3"
 RUN set -x \
  && apk add \
     --no-cache \
