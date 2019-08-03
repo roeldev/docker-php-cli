@@ -14,6 +14,6 @@ services:
     build:
       context: .
       args:
-        PHP_VERSION: "7.1"
+        PHP_VERSION: "7.3"
     environment:
       - VERBOSE_INIT=true

@@ -3,7 +3,7 @@ IMAGE_NAME=roeldev/php-cli
 # local.container_name
 CONTAINER_NAME=php-cli
 # local.build.args.PHP_VERSION
-DEFAULT_PHP_VERSION=7.1
+DEFAULT_PHP_VERSION=7.3
 
 .PHONY it:
 it: build tag start
