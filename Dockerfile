@@ -32,12 +32,14 @@ RUN set -x \
         php${PHP_VERSION}-common \
         php${PHP_VERSION}-ctype \
         php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-dom \
         php${PHP_VERSION}-json \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-openssl \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
-        php${PHP_VERSION}-tokenizer
+        php${PHP_VERSION}-tokenizer \
+        php${PHP_VERSION}-zip
 
 RUN set -x \
  # update default php settings
