@@ -27,6 +27,10 @@ then
     exit 1
 fi
 
+# create composer symlink dir
+mkdir /composer/
+ln -s /composer /root/.composer
+
 # run composer installer and install to /usr/local/bin
 php ${installerFile} \
     --quiet \

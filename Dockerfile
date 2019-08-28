@@ -1,5 +1,8 @@
 FROM roeldev/base-alpine:3.9-v1.1
 
+# expose environment variables
+ENV PHP_EXTENSIONS=""
+
 RUN set -x \
  # install dependencies
  && apk update \
