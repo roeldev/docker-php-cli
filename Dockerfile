@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/roeldev/base-alpine
-FROM roeldev/base-alpine:3.9-v1.1
+FROM roeldev/base-alpine:3.9-v1.2
 
 # expose environment variables
 ENV PHP_EXTENSIONS=""

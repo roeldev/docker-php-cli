@@ -34,14 +34,14 @@ phpize && ./configure && make
 # copy compile module
 cp modules/xdebug.so /usr/lib/php/modules
 
-# make sure the default config is copied to the /app/config/php folder
+# make sure the default config is copied to the /config/php folder
 # so the user can override the default xdebug settings
-mkdir -p /app/config/php/ /etc/default-configs/php/
+mkdir -p /config/php/ /etc/default-configs/php/
 cp /etc/php.d/xdebug.ini.default /etc/default-configs/php/xdebug.ini
-cp /etc/php.d/xdebug.ini.default /app/config/php/xdebug.ini
+cp /etc/php.d/xdebug.ini.default /config/php/xdebug.ini
 
 # create a symlink so the xdebug settings can be used by php
-ln -s /app/config/php/xdebug.ini /etc/php.d/xdebug.ini
+ln -s /config/php/xdebug.ini /etc/php.d/xdebug.ini
 
 # clean up
 apk del .phpize-dependencies
