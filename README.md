@@ -40,8 +40,24 @@ A custom image with PHP, based on Alpine Linux with S6 overlay.
 [mb-74-url]: https://microbadger.com/images/roeldev/php-cli:7.4-rc-latest
 
 
-## Installing additional modules
-It is possible to install additional modules when the container is initialized by setting the `PHP_EXTENSIONS` environment variable. Module names should not include a php or release version and must be comma separated without trailing comma. Example: `PHP_EXTENSIONS="dom,sodium,yaml"`. See the [links](#links) section for a list of packages that can be installed.
+## Modules
+Below is the result from `php -m`, a list of the modules that are installed by default:
+
+|   |   |   |
+|---|---|---|
+| Core     | libxml          | SimpleXML
+| ctype    | mbstring        | sodium   
+| curl     | openssl         | SPL      
+| date     | pcre            | standard 
+| dom      | PDO             | tokenizer
+| fileinfo | Phar            | xml      
+| filter   | phpdb_webhelper | xmlreader
+| hash     | posix           | xmlwriter
+| iconv    | readline        | zip      
+| json     | Reflection      | zlib     
+
+### Installing additional modules
+It is possible to install additional modules when the container is initialized by setting the `PHP_EXTENSIONS` environment variable. Extension names should not include a php or release version and must be comma separated without trailing comma. Example: `PHP_EXTENSIONS="sockets,yaml"`. See the [links](#links) section for a list of extensions that can be installed from PHP.earth.
 
 
 ## PHP configuration
@@ -53,19 +69,24 @@ The following php.ini directives are changed from their default values:
 | date.timezone | UTC
 
 
-## Install scripts
+## Installer scripts
 The installer scripts within this container are meant as a starting point for usage in local development images or with Docker multi builds. Usage within production images is not recommended.
 
 ### Install Composer
-Make sure the required dependencies for Composer (git, unzip) are installed, then run `/usr/local/bin/install_composer.sh`. Composer's install script and signature are downloaded from the Composer website and stored in `/etc/composer/`. The Composer executable is moved to `/usr/local/bin/` and ready to be used.
+Run `/usr/local/bin/install_composer.sh` to download the official Composer install script. It is stored in `/etc/composer/` together with the installer's signature. The install_composer.sh script will check if the signature matches and executes the installer. The Composer executable is moved to `/usr/local/bin/` and is ready to be used.
+> Make sure to add `/root/.composer/vendor/bin` to your PATH if you'd like to make use of binaries from global packages.
+
+### Install devkit tools
+After installing Composer it is possible to install some default devkit tools. Run `/usr/local/bin/install_devkit.sh` to globally install phploc, phpstan and phpcs.
 
 ### Install Xdebug
-Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will also copy a default xdebug.ini config file to `/app/config/php/xdebug.ini` where you can change the settings to your needs.
+Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will then copy a default xdebug.ini config file to `/app/config/php/xdebug.ini` where you can change the settings to your needs.
 
 
 ## Links
 - GitHub: https://github.com/roeldev/docker-php-cli
 - Docker Hub: https://hub.docker.com/r/roeldev/php-cli
+- PHP: https://php.net
 - PHP.earth packages: https://repos.php.earth/alpine/v3.9/x86_64/
 
 
