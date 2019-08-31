@@ -1,3 +1,4 @@
+# https://hub.docker.com/r/roeldev/base-alpine
 FROM roeldev/base-alpine:3.9-v1.1
 
 # expose environment variables
@@ -33,12 +34,20 @@ RUN set -x \
         php${PHP_VERSION}-ctype \
         php${PHP_VERSION}-curl \
         php${PHP_VERSION}-dom \
+        php${PHP_VERSION}-fileinfo \
+        php${PHP_VERSION}-iconv \
         php${PHP_VERSION}-json \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-openssl \
+        php${PHP_VERSION}-pdo \
         php${PHP_VERSION}-pear \
         php${PHP_VERSION}-phar \
+        php${PHP_VERSION}-posix \
+        php${PHP_VERSION}-simplexml \
+        php${PHP_VERSION}-sodium \
         php${PHP_VERSION}-tokenizer \
+        php${PHP_VERSION}-xmlreader \
+        php${PHP_VERSION}-xmlwriter \
         php${PHP_VERSION}-zip
 
 RUN set -x \
