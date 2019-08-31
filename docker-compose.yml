@@ -8,12 +8,42 @@ services:
       args:
         PHP_VERSION: "${PHP_VERSION}"
 
-  local:
-    image: roeldev/php-cli:local
-    container_name: php-cli
+  php-cli_7.1:
+    image: roeldev/php-cli:7.1-local
+    container_name: php-cli_7.1
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.1"
+    env_file:
+     - ./docker.env
+
+  php-cli_7.2:
+    image: roeldev/php-cli:7.2-local
+    container_name: php-cli_7.2
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.2"
+    env_file:
+     - ./docker.env
+
+  php-cli_7.3:
+    image: roeldev/php-cli:7.3-local
+    container_name: php-cli_7.3
     build:
       context: .
       args:
         PHP_VERSION: "7.3"
-    environment:
-      VERBOSE_INIT: "true"
+    env_file:
+     - ./docker.env
+
+  php-cli_7.4:
+    image: roeldev/php-cli:7.4-rc-local
+    container_name: php-cli_7.4-rc
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.4"
+    env_file:
+     - ./docker.env
