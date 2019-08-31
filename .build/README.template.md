@@ -49,7 +49,7 @@ Run `/usr/local/bin/install_composer.sh` to download the official Composer insta
 > Make sure to add `/root/.composer/vendor/bin` to your PATH if you'd like to make use of binaries from global packages.
 
 ### Install Xdebug
-Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will then copy a default xdebug.ini config file to `/app/config/php/xdebug.ini` where you can change the settings to your needs.
+Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will then copy a default xdebug.ini config file to `/config/php/xdebug.ini` where you can change the settings to your needs.
 After installing xdebug it is possible to enable/disable the extension at runtime with `/usr/local/bin/xdebug_enable.sh` and `/usr/local/bin/xdebug_disable.sh`. This does not remove xdebug but simply enables/disables loading of the extensions by PHP.
 
 

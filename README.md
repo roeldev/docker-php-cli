@@ -80,7 +80,7 @@ Run `/usr/local/bin/install_composer.sh` to download the official Composer insta
 After installing Composer it is possible to install some default devkit tools. Run `/usr/local/bin/install_devkit.sh` to globally install phploc, phpstan and phpcs.
 
 ### Install Xdebug
-Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will then copy a default xdebug.ini config file to `/app/config/php/xdebug.ini` where you can change the settings to your needs.
+Run `/usr/local/bin/install_xdebug.sh` to compile xdebug and install the module. It will then copy a default xdebug.ini config file to `/config/php/xdebug.ini` where you can change the settings to your needs.
 
 
 ## Links
