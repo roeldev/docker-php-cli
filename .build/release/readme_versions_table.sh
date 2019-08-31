@@ -1,0 +1,3 @@
+- read versions from .travis.yml matrix
+- run each docker container and get the needed version numbers
+- echo the resulting output table
