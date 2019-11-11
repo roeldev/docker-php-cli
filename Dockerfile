@@ -38,6 +38,7 @@ RUN set -x \
         php${PHP_VERSION}-iconv \
         php${PHP_VERSION}-json \
         php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-openssl \
         php${PHP_VERSION}-pdo \
         php${PHP_VERSION}-pear \

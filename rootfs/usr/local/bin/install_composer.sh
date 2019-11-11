@@ -28,7 +28,10 @@ then
 fi
 
 # create composer symlink dir
-mkdir /composer/
+if [ ! -d "/composer/" ]; then
+    mkdir /composer/
+fi
+
 ln -s /composer /root/.composer
 
 # run composer installer and install to /usr/local/bin
